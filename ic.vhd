@@ -5,6 +5,7 @@ use work.defs.all;
 use work.util.all;
 use work.rand.all;
 use work.test.all;
+use work.all;
 
 entity ic is
 	Port(

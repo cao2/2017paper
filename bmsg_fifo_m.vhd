@@ -2,18 +2,18 @@ library ieee;
 use ieee.std_logic_1164.all;
 use work.defs.all;
 
-entity msg_fifo_m is
+entity bmsg_fifo_m is
 	Port(
 		clock : in  std_logic;
 		reset : in  std_logic;
     we_o : out std_logic;
-    tofifo_o : out MSG_T;
-    data_i : MSG_T
+    tofifo_o : out BMSG_T;
+    data_i : BMSG_T
     
     );
-end msg_fifo_m;
+end bmsg_fifo_m;
 
-architecture rtl of msg_fifo_m is
+architecture rtl of bmsg_fifo_m is
 
 begin
 	fifo_p : process(reset, clock)
@@ -31,4 +31,3 @@ begin
 	end process;
 
 end rtl;
-
