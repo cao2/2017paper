@@ -232,7 +232,7 @@ architecture tb of top is
   signal rres_audio    : std_logic_vector(1 downto 0);
 
   signal cpu1_pwr_req, cpu1_pwr_res, cpu2_pwr_req, cpu2_pwr_res : MSG_T;
-
+ signal tag_i: IPTAG_T;
   signal proc0_done, proc1_done, usb_done, uart_done, gfx_done, audio_done : std_logic;
   signal full_snpres:std_logic;
 begin
@@ -326,7 +326,7 @@ begin
      gfx_upreq_i      => gfx_upreq,
      gfx_upres_o      => gfx_upres,
      gfx_upreq_full_o => gfx_upreq_full,
-    
+     tag => tag_i,
      audio_upreq_i      => audio_upreq,
      audio_upres_o      => audio_upres,
      audio_upreq_full_o => audio_upreq_full,
@@ -338,7 +338,7 @@ begin
      uart_upreq_i       => uart_upreq,
      uart_upres_o       => uart_upres,
      uart_upreq_full_o  => uart_upreq_full,
-     full_snpres_o      => full_snpres,  -- enabled if snp res fifo is full
+     full_snpres_o=> full_snpres,
      -- write
      waddr            => waddr,
      wlen             => wlen,
@@ -923,6 +923,11 @@ begin
         write(l, slv(pwr_audio_req));
         write(l, SEP);
         write(l, slv(pwr_audio_res));
+        
+        write(l, SEP);
+        write(l, tag_i);
+        
+        
         
         writeline(trace_file, l); 
       end if;

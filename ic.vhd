@@ -37,7 +37,7 @@ entity ic is
 		uart_upres_o                                    : out MSG_T;
 		uart_upreq_full_o                               : out std_logic;
 		
-		
+		tag												: out IPTAG_T;
 		full_snpres_o									: out std_logic;
 		-- -write address channel
 		waddr                                           : out ADR_T;
@@ -664,6 +664,7 @@ begin
 			rdready  <= '0';
 			state    := 0;
 		elsif rising_edge(Clock) then
+			tag<=(others=>'0');
 			-- dbg_chg("tomem_chan_p", state, prev_st);
 			test_v<=tomem_p.val;
 			test_cmd<=tomem_p.cmd;
@@ -699,6 +700,7 @@ begin
 
 			elsif state = 16 then
 				if rready = '1' then
+					tag<=tep_mem.tag;
 					-- mem_ack <= '0';
 					--report "state 16 of mem read";
 					rvalid_o <= '1';
